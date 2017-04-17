@@ -12,8 +12,7 @@ describe('filters-actions', () => {
       const value = 3;
       const type = 'contrast';
       let action = actions.changeContrast(value);
-
-      console.info('------ Action ---------:', JSON.stringify(action));
+      
       expect(action).toEqual({
         type: FiltersActions.CHANGE_CONTRAST,
         payload: { value, type }
