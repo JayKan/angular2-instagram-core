@@ -1,0 +1,40 @@
+import { Action } from '@ngrx/store';
+export declare class FiltersActions {
+    static CHANGE_CONTRAST: string;
+    static CHANGE_BRIGHTNESS: string;
+    static CHANGE_SATURATE: string;
+    static CHANGE_SEPIA: string;
+    static CHANGE_GRAYSCALE: string;
+    static CHANGE_INVERT: string;
+    static CHANGE_HUEROTATE: string;
+    static CHANGE_BLUR: string;
+    static CHANGE_BLEND: string;
+    static CHANGE_PRESET: string;
+    static LOAD_IMAGES: string;
+    static FETCH_IMAGES_FAILED: string;
+    static FETCH_IMAGES_FULFILLED: string;
+    static CHANGE_SELECTED_IMAGE: string;
+    static RESET_DEFAULTS: string;
+    static LOADING: string;
+    static API: string;
+    changeContrast(value: number, type?: string): Action;
+    changeBrightness(value: number, type?: string): Action;
+    changeSaturate(value: number, type?: string): Action;
+    changeSepia(value: number, type?: string): Action;
+    changeGrayScale(value: number, type?: string): Action;
+    changeInvert(value: number, type?: string): Action;
+    changeHueRotate(value: number, type?: string): Action;
+    changeBlur(value: number, type?: string): Action;
+    changeBlend(value: string, type?: string): Action;
+    changeLoading(value: boolean, type?: string): Action;
+    changePreset({figureStyle, overlayStyle, key}: {
+        figureStyle: any;
+        overlayStyle: any;
+        key: string;
+    }): Action;
+    loadImages(): Action;
+    fetchImagesFailed(error: any): Action;
+    fetchImagesFulfilled(data: any): Action;
+    changeSelectImage(value: string, type?: string): Action;
+    resetToDefaults(): Action;
+}
