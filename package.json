@@ -1,0 +1,113 @@
+{
+  "name": "angular2-instagram-core",
+  "version": "0.0.0",
+  "description": "Angular2 Instagram Core serivces",
+  "main": "release/index.js",
+  "typings": "release/index.d.ts",
+  "scripts": {
+    "test": "karma start",
+    "test:watch": "npm run test -- --auto-watch --no-single-run",
+    "clean": "npm-run-all -p clean:*",
+    "clean:build": "rimraf build",
+    "clean:release": "rimraf release",
+    "copy:build": "cpx \"src/**/*\" build",
+    "build": "webpack --display-error-details",
+    "build:package": "cross-env NODE_ENV=package npm run build",
+    "package:aot": "ngc -p tsconfig-aot.json",
+    "package:minify": "uglifyjs release/index.js --source-map release/index.min.js.map --source-map-url release/index.js.map --compress --mangle --screw-ie8 --output release/index.min.js",
+    "package": "npm-run-all -s clean copy:build package:aot build:package package:minify clean:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayKan/angular2-instagram-core.git"
+  },
+  "keywords": [
+    "Angular",
+    "Angular2",
+    "Angular4",
+    "Angular Services"
+  ],
+  "authors": [
+    "Jay Kan"
+  ],
+  "license": "MIT",
+  "files": [
+    "release"
+  ],
+  "engines": {
+    "node": ">=6.9",
+    "npm": ">3.x"
+  },
+  "bugs": {
+    "url": "https://github.com/JayKan/angular2-instagram-core/issues"
+  },
+  "homepage": "https://github.com/JayKan/angular2-instagram/blob/master/LICENSE",
+  "peerDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.3.0",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.1",
+    "@ngrx/effects": "^2.0.2"
+  },
+  "devDependencies": {
+    "@angular/core": "4.0.2",
+    "@angular/common": "4.0.2",
+    "@angular/compiler": "4.0.2",
+    "@angular/compiler-cli": "4.0.2",
+    "@angular/platform-browser": "4.0.2",
+    "@angular/platform-browser-dynamic": "4.0.2",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^2.0.2",
+    "@ngrx/store": "^2.2.1",
+    "@types/jasmine": "2.5.41",
+    "@types/node": "^7.0.12",
+    "angular2-template-loader": "^0.6.0",
+    "autoprefixer": "^6.7.0",
+    "awesome-typescript-loader": "~3.1.2",
+    "clean-webpack-plugin": "^0.1.15",
+    "copy-webpack-plugin": "^4.0.0",
+    "core-js": "2.4.1",
+    "cpx": "^1.5.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "file-loader": "^0.11.1",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.26.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-mocha-reporter": "^2.2.2",
+    "karma-remap-coverage": "^0.1.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.1",
+    "node-sass": "^4.3.0",
+    "npm-run-all": "^4.0.1",
+    "postcss": "^5.2.11",
+    "postcss-loader": "^1.2.2",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.5.2",
+    "rxjs": "^5.0.3",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.2.0",
+    "style-loader": "^0.14.1",
+    "to-string-loader": "^1.1.5",
+    "ts-helpers": "1.1.2",
+    "tslint": "^4.0.2",
+    "tslint-loader": "^3.3.0",
+    "typescript": "^2.2.2",
+    "uglify-js": "^2.7.5",
+    "url-loader": "^0.5.7",
+    "web-animations-js": "^2.2.2",
+    "webpack": "^2.3.3",
+    "webpack-combine-loaders": "^2.0.3",
+    "webpack-dev-server": "^2.2.0",
+    "webpack-merge": "^4.1.0",
+    "webpack-notifier": "^1.5.0",
+    "zone.js": "^0.8.5"
+  }
+}
