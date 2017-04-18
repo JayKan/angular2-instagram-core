@@ -222,7 +222,4 @@ describe('filters-actions', () => {
       });
     });
   });
-
-
-
 });
