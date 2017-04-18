@@ -76,6 +76,7 @@
     "file-loader": "^0.11.1",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.26.0",
+    "immutable": "^3.8.1",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.0",
