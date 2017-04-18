@@ -140,6 +140,7 @@ export function filtersReducer(state: FiltersState = initialState, { type, paylo
   }
 }
 
+//TODO @damnko: refactor to a utils file
 function getFilterStyles(state: FiltersState): string {
   let filters = '';
   filters += `contrast(${state.get('contrast')}%) `;
@@ -153,6 +154,7 @@ function getFilterStyles(state: FiltersState): string {
   return filters;
 }
 
+//TODO @damnko: refactor to a utils file
 function updateFilterStyle(state: FiltersState): { styles: FilterStyle } {
   let styles: FilterStyle = {
     WebkitFilter: getFilterStyles(state),
@@ -165,6 +167,7 @@ function updateFilterStyle(state: FiltersState): { styles: FilterStyle } {
   };
 }
 
+//TODO @damnko: refactor to a utils file
 function getOverlayColor(overlayType: string): string {
   const solidBackground = Map({
     a: 0.5,
@@ -210,6 +213,7 @@ function getOverlayColor(overlayType: string): string {
   }
 }
 
+//TODO @damnko: refactor to a utils file
 function updateOverlayStyle(state: FiltersState): { overlay: OverlayStyle } {
   const opacity: number = state.get('opacity');
   const overlayBackground: string = state.get('blend');

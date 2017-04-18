@@ -175,7 +175,7 @@ describe('filters-actions', () => {
     it('should create an action', () => {
       const error = {
         message: 'No images found'
-      }
+      };
       const action = actions.fetchImagesFailed(error);
 
       expect(action).toEqual({

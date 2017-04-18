@@ -173,7 +173,4 @@ export class FiltersActions {
       type: FiltersActions.RESET_DEFAULTS
     };
   }
-
-
-
 }
