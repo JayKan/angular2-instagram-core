@@ -126,15 +126,19 @@ export class FiltersService {
   }
 
   changeContrast(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeContrast(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeContrast(value)
+      );
+    }
   }
 
   changeBrightness(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeBrightness(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeBrightness(value)
+      );
+    }
   }
 
   changeSaturate(value: number): void {

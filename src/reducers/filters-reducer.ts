@@ -18,7 +18,8 @@ const DEFAULTS = Map({
   blend:   'none',
   opacity: 50
 });
-const initialState: FiltersState = Map({
+
+export const initialState: FiltersState = Map({
   contrast:   100,
   brightness: 100,
   saturate:   100,
