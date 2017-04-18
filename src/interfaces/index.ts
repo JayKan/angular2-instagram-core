@@ -1,3 +1,5 @@
+import { Map } from 'immutable';
+
 export interface FilterStyle {
   WebkitFilter: string;
   filter: string;

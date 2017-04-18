@@ -2,10 +2,9 @@ import { Action } from '@ngrx/store';
 import { Map, List } from 'immutable';
 
 import { FiltersActions } from '../actions/filters-actions';
-import { FilterStyle, OverlayStyle } from '../interfaces';
+import { FiltersState, FilterStyle, OverlayStyle } from '../interfaces';
 import { presets } from '../constants';
 
-export type FiltersState = Map<string, any>;
 const defaultImage: string = 'https://source.unsplash.com/W_9mOGUwR08/800x600';
 const DEFAULTS = Map({
   contrast:   100,

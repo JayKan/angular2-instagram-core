@@ -1,9 +1,9 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/let';
-import { AppState, FilterStyle, OverlayStyle } from '../interfaces';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { FiltersState } from './filters-reducer';
+import { AppState, FiltersState, FilterStyle, OverlayStyle } from '../interfaces';
 
 export function getFiltersState(state$: Observable<AppState>): Observable<FiltersState> {
   return state$.select((state: AppState) => state.filters);
