@@ -44,7 +44,9 @@ export const initialState: FiltersState = Map({
     left: '0',
     pointerEvents: 'none',
     position: 'absolute',
-    mixBlendMode: 'normal'
+    mixBlendMode: 'normal',
+    opacity: 0.5,
+    background: getOverlayColor('none')
   }),
   selectedImage: defaultImage,
   images: List(),

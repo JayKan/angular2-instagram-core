@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store, StoreModule, Action } from '@ngrx/store';
 import { HttpModule } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Map } from 'immutable';
 import { filtersReducer, initialState } from '../reducers';
 import { FiltersActions } from '../actions';
 import { FiltersService } from './filters-service';
@@ -30,96 +32,271 @@ describe('filters-service', () => {
 
   // Test all observables properties from `filters-service`
   describe('<observables>', () => {
-    describe('contrast$ observable<number>', () => {
-      it('should stream the current contrast from store', () => {
-        let count = 0;
-        let initialContrastValue = initialState.get('contrast');
-        let contrastValue = null;
+    let count: number;
+    let value: any;
 
-        service.contrast$.subscribe(value => {
+    beforeEach(() => {
+      count = 0;
+      value = null;
+    });
+
+    describe('contrast$ observable<number>', () => {
+      it(`should stream the current contrast from store`, () => {
+        numberSharedTest('contrast', service.contrast$, actions.changeContrast);
+      })
+    });
+
+    describe('brightness$ observable', () => {
+      it(`should stream the current brightness from store`, () => {
+        numberSharedTest('brightness', service.brightness$, actions.changeBrightness);
+      });
+    });
+
+    describe('saturate$ observable', () => {
+      it(`should stream the current saturate from store`, () => {
+        numberSharedTest('saturate', service.saturate$, actions.changeSaturate);
+      });
+    });
+
+    describe('sepia$ observable', () => {
+      it(`should stream the current sepia from store`, () => {
+        numberSharedTest('sepia', service.sepia$, actions.changeSepia);
+      });
+    });
+
+    describe('grayscale$ observable', () => {
+      it(`should stream the current grayscale from store`, () => {
+        numberSharedTest('grayScale', service.grayscale$, actions.changeGrayScale);
+      });
+    });
+
+    describe('invert$ observable', () => {
+      it(`should stream the current invert from store`, () => {
+        numberSharedTest('invert', service.invert$, actions.changeInvert);
+      });
+    });
+
+    describe('hueRotate$ observable', () => {
+      it(`should stream the current hueRotate from store`, () => {
+        numberSharedTest('hueRotate', service.hueRotate$, actions.changeHueRotate);
+      });
+    });
+
+    describe('blur$ observable', () => {
+      it(`should stream the current blur from store`, () => {
+        numberSharedTest('blur', service.blur$, actions.changeBlur);
+      });
+    });
+
+    describe('blend$ observable', () => {
+      it('should stream the current blend from store', () => {
+        const initialvalue = initialState.get('blend');
+
+        service.blend$.subscribe(res => {
           count++;
-          contrastValue = value;
+          value = res;
         });
 
-       // auto-emitting initial value
         expect(count).toBe(1);
-        expect(contrastValue).toBe(initialContrastValue);
+        expect(value).toBe(initialvalue);
 
-        // contrast value changes 1st time
-        store.dispatch(actions.changeContrast(50));
+        store.dispatch(actions.changeBlend('blend'));
         expect(count).toBe(2);
-        expect(contrastValue).toBe(50);
+        expect(value).toBe('blend');
 
-        // same contrast value: should not emit
-        store.dispatch(actions.changeContrast(50));
+        store.dispatch(actions.changeBlend('blend'));
         expect(count).toBe(2);
 
-        // contrast value changes 2nd time
-        store.dispatch(actions.changeContrast(60));
+        store.dispatch(actions.changeBlend('overlay'));
         expect(count).toBe(3);
-        expect(contrastValue).toBe(60);
+        expect(value).toBe('overlay');
 
-        // dispatching unrelated action: should not emit any new value
         store.dispatch({ type: 'UNDEFINED' });
         expect(count).toBe(3);
       });
     });
 
-    describe('brightness$ observable', () => {
-
-    });
-
-    describe('saturate$ observable', () => {
-
-    });
-
-    describe('sepia$ observable', () => {
-
-    });
-
-    describe('grayscale$ observable', () => {
-
-    });
-
-    describe('invert$ observable', () => {
-
-    });
-
-    describe('hueRotate$ observable', () => {
-
-    });
-
-    describe('blur$ observable', () => {
-
-    });
-
-    describe('blend$ observable', () => {
-
-    });
-
     describe('overlayStyle$ observable', () => {
+      it('should stream the current overlayStyle from store', () => {
+        const initialValue = initialState.get('overlay').toJS();
 
+        service.overlayStyle$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toEqual(initialValue);
+
+        // HELP: is this correct or should I create a mock action that
+        // changes only the overlayStyle prop?
+        let newValue = {
+          figureStyle: initialState.get('styles'),
+          overlayStyle: Map(Object.assign({}, initialState.get('overlay').toJS(), { background: 'solid_background' })),
+          key: 'aden'
+        }
+
+        // test after changing the overlayStyle part of the payload
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+        expect(value).toEqual(newValue.overlayStyle.toJS());
+
+        // not changing overlayStyle.background shouldn't emit any new value
+        newValue.overlayStyle.set('display', 'inline');
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+
+        // HELP: when the default action is triggered the overlayStyle gets updated
+        // should we test this behavior?
+        // store.dispatch({ type: 'UNDEFINED' });
+        // expect(count).toBe(2);
+      });
     });
 
     describe('filterStyle$ observable', () => {
-
+      // TODO(damnko): complete this once overlayStyle test will be confirmed as appropriate
     });
 
     describe('selectedImage$ observable', () => {
+      it('should stream the current selectedImage$ from store', () => {
+        const initialValue = initialState.get('selectedImage');
 
+        service.selectedImage$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toBe(initialValue);
+
+        store.dispatch(actions.changeSelectImage('https://someurl.com/newimage/'));
+        expect(count).toBe(2);
+        expect(value).toBe('https://someurl.com/newimage/');
+
+        store.dispatch(actions.changeSelectImage('https://someurl.com/newimage/'));
+        expect(count).toBe(2);
+
+        store.dispatch(actions.changeSelectImage('https://someurl.com/newimage-1/'));
+        expect(count).toBe(3);
+        expect(value).toBe('https://someurl.com/newimage-1/');
+
+        store.dispatch({ type: 'UNDEFINED' });
+        expect(count).toBe(3);
+      });
     });
 
     describe('images$ observable', () => {
+      it('should stream the current images$ from store', () => {
+        const initialValue = initialState.get('images').toJS();
 
+        service.images$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toEqual(initialValue);
+
+        const images = [{
+          id: 1,
+          thumb: 'https://url/image-1/'
+        }, {
+          id: 2,
+          thumb: 'https://url/image-2/'
+        }];
+
+        store.dispatch(actions.fetchImagesFulfilled(images));
+        expect(count).toBe(2);
+        expect(value).toEqual(images);
+
+        // HELP: triggering the default event returns the same array of images
+        // and triggers service.images$ even if selectors.getImages uses distinctUntilChanged()
+        // store.dispatch({ type: 'UNDEFINED' });
+        // expect(count).toBe(2);
+      });
     });
 
     describe('error$ observable', () => {
+      it('should stream the current error$ from store', () => {
+        const initialValue = initialState.get('error');
 
+        service.error$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toBe(initialValue);
+
+        store.dispatch(actions.fetchImagesFailed('error'));
+        expect(count).toBe(2);
+        expect(value).toBe('error');
+
+        store.dispatch({ type: 'UNDEFINED' });
+        expect(count).toBe(2);
+      });
     });
 
     describe('loading$ observable', () => {
+      it('should stream the current loading$ from store', () => {
+        const initialValue = initialState.get('loading');
 
+        service.loading$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toBe(initialValue);
+
+        store.dispatch(actions.changeLoading(true));
+        expect(count).toBe(2);
+        expect(value).toBe(true);
+
+        store.dispatch(actions.changeLoading(true));
+        expect(count).toBe(2);
+
+        store.dispatch(actions.changeLoading(false));
+        expect(count).toBe(3);
+        expect(value).toBe(false);
+
+        store.dispatch({ type: 'UNDEFINED' });
+        expect(count).toBe(3);
+      });
     });
+
+    function numberSharedTest(statePropName: string, serviceProp: Observable<number>, action: (v: number) => Action) {
+      let initialValue = initialState.get(statePropName);
+
+      serviceProp.subscribe(res => {
+        count++;
+        value = res;
+      });
+
+      // HELP: shouldn't we wrap each of these in a dedicated "it" function?
+
+      // auto-emitting initial value
+      expect(count).toBe(1);
+      expect(value).toBe(initialValue);
+
+      // value changes 1st time
+      store.dispatch(action(50));
+      expect(count).toBe(2);
+      expect(value).toBe(50);
+
+      // same value: should not emit
+      store.dispatch(action(50));
+      expect(count).toBe(2);
+
+      // value changes 2nd time
+      store.dispatch(action(60));
+      expect(count).toBe(3);
+      expect(value).toBe(60);
+
+      // dispatching unrelated action: should not emit any new value
+      store.dispatch({ type: 'UNDEFINED' });
+      expect(count).toBe(3);
+    }
   });
 
   // Test all actions methods from `filters-service`
