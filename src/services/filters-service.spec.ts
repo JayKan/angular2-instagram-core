@@ -399,7 +399,7 @@ describe('filters-service', () => {
           actionName = actionInstance().actionName;
         });
 
-        it(`should call store.dispatch() with ${actionName} action`, () => {
+        it(`should call store.dispatch() with ${testName} action`, () => {
           serviceFunction(value);
 
           expect(store.dispatch).toHaveBeenCalledTimes(1);
