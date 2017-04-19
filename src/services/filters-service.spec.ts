@@ -265,7 +265,7 @@ describe('filters-service', () => {
       });
     });
 
-    function numberSharedTest(statePropName: string, serviceProp: Observable<number>, action: (v: number) => Action) {
+    function numberSharedTest(statePropName: string, serviceProp: Observable<number>, action: (v: number) => Action): void {
       let initialValue = initialState.get(statePropName);
 
       serviceProp.subscribe(res => {
@@ -301,83 +301,67 @@ describe('filters-service', () => {
 
   // Test all actions methods from `filters-service`
   describe('<actions>', () => {
-    describe('changeContrast()', () => {
-      it('should call store.dispatch() with CHANGE_CONTRAST action', () => {
-        let value = 50;
+    let value: number;
 
-        spyOn(store, 'dispatch');
-        service.changeContrast(value);
-
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith(actions.changeContrast(value));
-
-        value = 90;
-        service.changeContrast(value);
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
-        expect(store.dispatch).toHaveBeenCalledWith(actions.changeContrast(value))
-      });
-
-      it('should NOT dispatch action if contrast value is undefined or invalid', () => {
-        spyOn(store, 'dispatch');
-
-        service.changeContrast(undefined);
-        expect(store.dispatch).not.toHaveBeenCalled();
-
-        service.changeContrast(null);
-        expect(store.dispatch).not.toHaveBeenCalled();
-      });
+    beforeEach(() => {
+      value = 50;
+      spyOn(store, 'dispatch');
     });
 
-    describe('changeBrightness()', () => {
-      it('should call store.dispatch() with CHANGE_BRIGHTNESS action', () => {
-        let value = 50;
+    const contrast: ActionInstance = () => {
+      return {
+        // bind(service) otherwise "this" in filters-service functions returns undefined
+        service: service.changeContrast.bind(service),
+        action: actions.changeContrast,
+        actionName: 'CHANGE_CONTRAST'
+      };
+    };
+    sharedObservableTest(contrast, 'changeContrast()');
 
-        spyOn(store, 'dispatch');
-        service.changeBrightness(value);
+    const saturate: ActionInstance = () => {
+      return {
+        service: service.changeSaturate.bind(service),
+        action: actions.changeSaturate,
+        actionName: 'CHANGE_SATURATE'
+      };
+    };
+    sharedObservableTest(saturate, 'changeSaturate()');
 
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith(actions.changeBrightness(value));
+    const sepia: ActionInstance = () => {
+      return {
+        service: service.changeSepia.bind(service),
+        action: actions.changeSepia,
+        actionName: 'CHANGE_SEPIA'
+      };
+    };
+    sharedObservableTest(sepia, 'changeSepia()');
 
-        value = 98;
-        service.changeBrightness(value);
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
-        expect(store.dispatch).toHaveBeenCalledWith(actions.changeBrightness(value));
-      });
+    const invert: ActionInstance = () => {
+      return {
+        service: service.changeInvert.bind(service),
+        action: actions.changeInvert,
+        actionName: 'CHANGE_INVERT'
+      };
+    };
+    sharedObservableTest(invert, 'changeInvert()');
 
-      it('should NOT dispatch action if brightness value is undefined or invalid', () => {
-        spyOn(store, 'dispatch');
+    const hueRotate: ActionInstance = () => {
+      return {
+        service: service.changeHueRotate.bind(service),
+        action: actions.changeHueRotate,
+        actionName: 'CHANGE_HUEROTATE'
+      };
+    };
+    sharedObservableTest(hueRotate, 'changeHueRotate()');
 
-        service.changeBrightness(undefined);
-        expect(store.dispatch).not.toHaveBeenCalled();
-
-        service.changeBrightness(null);
-        expect(store.dispatch).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('changeSaturate()', () => {
-
-    });
-
-    describe('changeSepia()', () => {
-
-    });
-
-    describe('changeGrayScale()', () => {
-
-    });
-
-    describe('changeInvert()', () => {
-
-    });
-
-    describe('changeHueRotate()', () => {
-
-    });
-
-    describe('changeBlur()', () => {
-
-    });
+    const blur: ActionInstance = () => {
+      return {
+        service: service.changeBlur.bind(service),
+        action: actions.changeBlur,
+        actionName: 'CHANGE_BLUR'
+      };
+    };
+    sharedObservableTest(blur, 'changeBlur()');
 
     describe('changeBlend()', () => {
 
@@ -403,5 +387,46 @@ describe('filters-service', () => {
 
     });
 
+    function sharedObservableTest(actionInstance: ActionInstance, testName: string) {
+      describe(testName, () => {
+        let serviceFunction: (value: number) => void;
+        let action: (value: number) => Action;
+        let actionName: string;
+
+        beforeEach(() => {
+          serviceFunction = actionInstance().service;
+          action = actionInstance().action;
+          actionName = actionInstance().actionName;
+        });
+
+        it(`should call store.dispatch() with ${actionName} action`, () => {
+          serviceFunction(value);
+
+          expect(store.dispatch).toHaveBeenCalledTimes(1);
+          expect(store.dispatch).toHaveBeenCalledWith(action(value));
+
+          value = 90;
+          serviceFunction(value);
+          expect(store.dispatch).toHaveBeenCalledTimes(2);
+          expect(store.dispatch).toHaveBeenCalledWith(action(value))
+        });
+
+        it('should NOT dispatch action if value is undefined or invalid', () => {
+
+          serviceFunction(undefined);
+          expect(store.dispatch).not.toHaveBeenCalled();
+
+          serviceFunction(null);
+          expect(store.dispatch).not.toHaveBeenCalled();
+        });
+      });
+    }
+
   });
 });
+
+type ActionInstance = () => {
+  service: (value: number) => void,
+  action: (value: number|string) => Action,
+  actionName: string
+}
