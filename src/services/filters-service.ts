@@ -142,39 +142,51 @@ export class FiltersService {
   }
 
   changeSaturate(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeSaturate(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeSaturate(value)
+      );
+    }
   }
 
   changeSepia(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeSepia(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeSepia(value)
+      );
+    }
   }
 
   changeGrayScale(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeGrayScale(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeGrayScale(value)
+      );
+    }
   }
 
   changeInvert(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeInvert(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeInvert(value)
+      );
+    }
   }
 
   changeHueRotate(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeHueRotate(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeHueRotate(value)
+      );
+    }
   }
 
   changeBlur(value: number): void {
-    this.store$.dispatch(
-      this.actions.changeBlur(value)
-    );
+    if (typeof value === 'number') {
+      this.store$.dispatch(
+        this.actions.changeBlur(value)
+      );
+    }
   }
 
   changeBlend(value: string): void {
