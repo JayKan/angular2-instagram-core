@@ -90,7 +90,7 @@ describe('filters-service', () => {
 
     describe('blend$ observable', () => {
       it('should stream the current blend from store', () => {
-        const initialvalue = initialState.get('blend');
+        const initialValue = initialState.get('blend');
 
         service.blend$.subscribe(res => {
           count++;
@@ -98,7 +98,7 @@ describe('filters-service', () => {
         });
 
         expect(count).toBe(1);
-        expect(value).toBe(initialvalue);
+        expect(value).toBe(initialValue);
 
         store.dispatch(actions.changeBlend('blend'));
         expect(count).toBe(2);
@@ -130,11 +130,12 @@ describe('filters-service', () => {
 
         // HELP: is this correct or should I create a mock action that
         // changes only the overlayStyle prop?
+        // (I think this is good)
         let newValue = {
           figureStyle: initialState.get('styles'),
           overlayStyle: Map(Object.assign({}, initialState.get('overlay').toJS(), { background: 'solid_background' })),
           key: 'aden'
-        }
+        };
 
         // test after changing the overlayStyle part of the payload
         store.dispatch(actions.changePreset(newValue));
@@ -150,6 +151,7 @@ describe('filters-service', () => {
         // should we test this behavior?
         // store.dispatch({ type: 'UNDEFINED' });
         // expect(count).toBe(2);
+        // (NO, I think this is good we don't need to test the default)
       });
     });
 
@@ -213,6 +215,7 @@ describe('filters-service', () => {
         // and triggers service.images$ even if selectors.getImages uses distinctUntilChanged()
         // store.dispatch({ type: 'UNDEFINED' });
         // expect(count).toBe(2);
+        // (Hmm interesting, we can come back to this one later)
       });
     });
 
@@ -274,6 +277,7 @@ describe('filters-service', () => {
       });
 
       // HELP: shouldn't we wrap each of these in a dedicated "it" function?
+      // (Yes we can wrap `it` function with appropriate comments)
 
       // auto-emitting initial value
       expect(count).toBe(1);
