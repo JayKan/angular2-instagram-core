@@ -128,9 +128,6 @@ describe('filters-service', () => {
         expect(count).toBe(1);
         expect(value).toEqual(initialValue);
 
-        // HELP: is this correct or should I create a mock action that
-        // changes only the overlayStyle prop?
-        // (I think this is good)
         let newValue = {
           figureStyle: initialState.get('styles'),
           overlayStyle: Map(Object.assign({}, initialState.get('overlay').toJS(), { background: 'solid_background' })),
@@ -146,12 +143,6 @@ describe('filters-service', () => {
         newValue.overlayStyle.set('display', 'inline');
         store.dispatch(actions.changePreset(newValue));
         expect(count).toBe(2);
-
-        // HELP: when the default action is triggered the overlayStyle gets updated
-        // should we test this behavior?
-        // store.dispatch({ type: 'UNDEFINED' });
-        // expect(count).toBe(2);
-        // (NO, I think this is good we don't need to test the default)
       });
     });
 
@@ -211,11 +202,10 @@ describe('filters-service', () => {
         expect(count).toBe(2);
         expect(value).toEqual(images);
 
-        // HELP: triggering the default event returns the same array of images
+        // TODO: triggering the default event returns the same array of images
         // and triggers service.images$ even if selectors.getImages uses distinctUntilChanged()
         // store.dispatch({ type: 'UNDEFINED' });
         // expect(count).toBe(2);
-        // (Hmm interesting, we can come back to this one later)
       });
     });
 
@@ -275,9 +265,6 @@ describe('filters-service', () => {
         count++;
         value = res;
       });
-
-      // HELP: shouldn't we wrap each of these in a dedicated "it" function?
-      // (Yes we can wrap `it` function with appropriate comments)
 
       // auto-emitting initial value
       expect(count).toBe(1);
