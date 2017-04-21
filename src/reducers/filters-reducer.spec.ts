@@ -1,11 +1,6 @@
 import { FiltersActions } from '../actions';
-import {
-  filtersReducer,
-  initialState,
-  updateFilterStyle,
-  updateOverlayStyle,
-  DEFAULTS
-} from './filters-reducer';
+import { filtersReducer, initialState, DEFAULTS } from './filters-reducer';
+import { updateFilterStyle, updateOverlayStyle } from '../helpers';
 import { FiltersState } from '../interfaces';
 import { presets } from '../constants';
 
