@@ -6,7 +6,7 @@ import { FiltersState, FilterStyle, OverlayStyle } from '../interfaces';
 import { presets } from '../constants';
 
 const defaultImage: string = 'https://source.unsplash.com/W_9mOGUwR08/800x600';
-const DEFAULTS = Map({
+export const DEFAULTS = Map({
   contrast:   100,
   brightness: 100,
   saturate:   100,

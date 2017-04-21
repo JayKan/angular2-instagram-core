@@ -1,10 +1,22 @@
 import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
-import { Map } from 'immutable';
+import { initialState } from './filters-reducer';
 import {
   getFiltersState,
   getFilterStyleValue,
-  getOverlayStyleValue
+  getOverlayStyleValue,
+  getBrightnessFilterValue,
+  getSaturateFilterValue,
+  getSepiaFilterValue,
+  getGrayScaleFilterValue,
+  getInvertFilterValue,
+  getHueRotateFilterValue,
+  getBlurFilterValue,
+  getBlendFilterValue,
+  getSelectedImage,
+  getImages,
+  getError,
+  getLoading
 } from './selectors';
 
 import { AppState, FiltersState } from '../interfaces';
@@ -14,28 +26,7 @@ describe('selectors', () => {
   let appState$: Observable<AppState>;
 
   beforeEach(() => {
-      const filters: FiltersState = Map({
-        contrast:   100,
-        brightness: 100,
-        saturate:   100,
-        styles: Map({
-          position: 'relative',
-          WebkitFilter: null,
-          filter: null
-        }),
-        overlay: Map({
-          content: ' ',
-          display: 'block',
-          height: '100%',
-          width: '100%',
-          top: '0',
-          left: '0',
-          pointerEvents: 'none',
-          position: 'absolute',
-          mixBlendMode: 'normal'
-        })
-      });
-      appState = { filters };
+      appState = { filters: initialState };
       appState$ = Observable.of(appState);
   });
 
@@ -62,5 +53,26 @@ describe('selectors', () => {
       });
     });
   });
+
+  // TODO: this does not work at the moment
+  // http://stackoverflow.com/questions/43514984/how-to-handle-a-subscription-observable-inside-a-jasmine-test
+  // checkFilterStateProp('brightness', getBrightnessFilterValue);
+
+  // function checkFilterStateProp(propName: string, func: any, toJs: boolean = false): any {
+  //   describe('functionName()', () => {
+  //     let val: any;
+  //     let count = 0;
+
+  //     const value = appState.filters.get(propName);
+  //     func(appState$).subscribe(res => {
+  //       count++;
+  //       val = res;
+  //     });
+  //     it('should return some property', () => {
+  //       expect(count).toBe(1);
+  //       expect(val).toEqual(toJs ? value.toJS() : value);
+  //     });
+  //   });
+  // }
 
 });
