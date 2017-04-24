@@ -6,10 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import { Map as ImmutableMap } from 'immutable';
 import 'rxjs/add/operator/finally';
 
-import { filtersReducer, initialState } from '../reducers';
+import { filtersReducer, initialState, DEFAULTS } from '../reducers';
 import { FiltersActions } from '../actions';
 import { FiltersService } from './filters-service';
 import { AppState } from '../interfaces';
+import { presets } from '../constants';
+import { updateFilterStyle, updateOverlayStyle } from '../helpers';
 
 describe('filters-service', () => {
   let actions: FiltersActions;
@@ -144,14 +146,54 @@ describe('filters-service', () => {
         expect(value).toEqual(newValue.overlayStyle.toJS());
 
         // not changing overlayStyle.background shouldn't emit any new value
-        newValue.overlayStyle.set('display', 'inline');
+        const overlayStyle = newValue.overlayStyle.set('display', 'inline');
+        newValue.overlayStyle = overlayStyle;
         store.dispatch(actions.changePreset(newValue));
         expect(count).toBe(2);
       });
     });
 
     describe('filterStyle$ observable', () => {
-      // TODO(damnko): complete this once overlayStyle test will be confirmed as appropriate
+      it('should stream the current filterStyle from store', () => {
+        const state = initialState
+          .merge({ 'contrast'   : 100   })
+          .merge({ 'brightness' : 100   })
+          .merge({ 'saturate'   : 100   })
+          .merge({ 'sepia'      : 0     })
+          .merge({ 'grayScale'  : 0     })
+          .merge({ 'invert'     : 0     })
+          .merge({ 'hueRotate'  : 0     })
+          .merge({ 'blur'       : 0     })
+          .merge({ 'blend'      : 'none'})
+          .merge({ 'opacity'    : 50    })
+          .merge(updateFilterStyle(DEFAULTS))
+          .merge(updateOverlayStyle(DEFAULTS));
+
+        service.filterStyle$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toEqual(state.get('styles').toJS());
+
+        const newValue = {
+          figureStyle: ImmutableMap(Object.assign({}, state.get('styles').toJS(), { filter: 'blur(20px)' })),
+          overlayStyle: initialState.get('overlay'),
+          key: 'aden'
+        };
+
+        // test after changing the figureStyle part of the payload
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+        expect(value).toEqual(newValue.figureStyle.toJS());
+
+        // not changing figureStyle.webkitFilter or figureStyle.filter shouldn't emit any new value
+        const figureStyle = newValue.figureStyle.set('position', 'absolute');
+        newValue.figureStyle = figureStyle;
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+      });
     });
 
     describe('selectedImage$ observable', () => {
