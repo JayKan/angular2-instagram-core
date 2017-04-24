@@ -39,7 +39,7 @@ export declare class FiltersService {
     images$: Observable<any>;
     error$: Observable<string>;
     loading$: Observable<boolean>;
-    private cache;
+    cache: Map<any, any>;
     constructor(store$: Store<AppState>, actions: FiltersActions, http: Http);
     change({value, type}: {
         value: any;

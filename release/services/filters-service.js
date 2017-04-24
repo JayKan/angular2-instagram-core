@@ -83,22 +83,34 @@ var FiltersService = (function () {
         }
     };
     FiltersService.prototype.changeSaturate = function (value) {
-        this.store$.dispatch(this.actions.changeSaturate(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeSaturate(value));
+        }
     };
     FiltersService.prototype.changeSepia = function (value) {
-        this.store$.dispatch(this.actions.changeSepia(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeSepia(value));
+        }
     };
     FiltersService.prototype.changeGrayScale = function (value) {
-        this.store$.dispatch(this.actions.changeGrayScale(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeGrayScale(value));
+        }
     };
     FiltersService.prototype.changeInvert = function (value) {
-        this.store$.dispatch(this.actions.changeInvert(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeInvert(value));
+        }
     };
     FiltersService.prototype.changeHueRotate = function (value) {
-        this.store$.dispatch(this.actions.changeHueRotate(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeHueRotate(value));
+        }
     };
     FiltersService.prototype.changeBlur = function (value) {
-        this.store$.dispatch(this.actions.changeBlur(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeBlur(value));
+        }
     };
     FiltersService.prototype.changeBlend = function (value) {
         this.store$.dispatch(this.actions.changeBlend(value));

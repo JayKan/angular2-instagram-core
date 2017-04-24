@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
+import { FiltersActions } from './actions';
+import { FiltersService } from './services';
+export * from './effects';
+export * from './reducers';
 var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }
     /**
      * @description Use this method in your other (non root) modules to import the services
-     * @param config
      * @returns {ModuleWithProviders}
      */
-    Angular2InstagramCoreModule.forChild = function (config) {
+    Angular2InstagramCoreModule.forChild = function () {
         return {
             ngModule: Angular2InstagramCoreModule,
-            providers: []
+            providers: [
+                FiltersActions,
+                FiltersService
+            ]
         };
     };
     return Angular2InstagramCoreModule;

@@ -12304,6 +12304,30 @@ var FiltersActions_1;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__("./src/actions/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__("./src/services/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__effects__ = __webpack_require__("./src/effects/index.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__effects__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reducers__ = __webpack_require__("./src/reducers/index.ts");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["c"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["d"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["h"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["i"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["j"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["k"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["l"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["m"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["n"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["o"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["p"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["q"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["r"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_4__reducers__["s"]; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Angular2InstagramCoreModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -12312,18 +12336,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
+
+
+
+
 var Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = (function () {
     function Angular2InstagramCoreModule() {
     }
     /**
      * @description Use this method in your other (non root) modules to import the services
-     * @param config
      * @returns {ModuleWithProviders}
      */
-    Angular2InstagramCoreModule.forChild = function (config) {
+    Angular2InstagramCoreModule.forChild = function () {
         return {
             ngModule: Angular2InstagramCoreModule_1,
-            providers: []
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_1__actions__["a" /* FiltersActions */],
+                __WEBPACK_IMPORTED_MODULE_2__services__["a" /* FiltersService */]
+            ]
         };
     };
     return Angular2InstagramCoreModule;
@@ -12638,6 +12668,106 @@ FiltersEffects = __decorate([
 
 /***/ }),
 
+/***/ "./src/helpers.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_immutable__ = __webpack_require__("./node_modules/immutable/dist/immutable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_immutable__);
+/* unused harmony export getFilterStyles */
+/* harmony export (immutable) */ __webpack_exports__["b"] = updateFilterStyle;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getOverlayColor;
+/* harmony export (immutable) */ __webpack_exports__["c"] = updateOverlayStyle;
+
+function getFilterStyles(state) {
+    var filters = '';
+    filters += "contrast(" + state.get('contrast') + "%) ";
+    filters += "brightness(" + state.get('brightness') + "%) ";
+    filters += "saturate(" + state.get('saturate') + "%) ";
+    filters += "sepia(" + state.get('sepia') + "%) ";
+    filters += "grayscale(" + state.get('grayScale') + "%) ";
+    filters += "invert(" + state.get('invert') + "%) ";
+    filters += "hue-rotate(" + state.get('hueRotate') + "deg) ";
+    filters += "blur(" + state.get('blur') + "px) ";
+    return filters;
+}
+function updateFilterStyle(state) {
+    var styles = {
+        WebkitFilter: getFilterStyles(state),
+        filter: getFilterStyles(state),
+        position: 'relative'
+    };
+    return {
+        styles: styles
+    };
+}
+function getOverlayColor(overlayType) {
+    var solidBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
+        a: 0.5,
+        b: 253,
+        g: 162,
+        r: 62
+    });
+    var linearBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
+        a: 0.5,
+        b: 253,
+        g: 162,
+        r: 62,
+        stop: 10,
+        direction: 'to bottom'
+    });
+    var radialBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
+        a: 0.04,
+        b: 70,
+        g: 70,
+        r: 70,
+        stop: 100,
+        position: 'center center',
+        size: 'closest-corner'
+    });
+    var stop1 = linearBackground.get('stop');
+    var stop2 = radialBackground.get('stop');
+    var color1 = "rgba(" + linearBackground.get('r') + ", " + linearBackground.get('g') + ", " + linearBackground.get('b') + ", " + linearBackground.get('a') + ")";
+    var color2 = "rgba(" + radialBackground.get('r') + ", " + radialBackground.get('g') + ", " + radialBackground.get('b') + ", " + radialBackground.get('a') + ")";
+    switch (overlayType) {
+        case 'solid_background':
+            return "rgba(" + solidBackground.get('r') + ", " + solidBackground.get('g') + ", " + solidBackground.get('b') + ", " + solidBackground.get('a') + ")";
+        case 'linear_gradient':
+            var direction = linearBackground.get('direction');
+            return "linear-gradient(" + direction + ", " + color1 + " " + stop1 + "%, " + color2 + " " + stop2 + "%)";
+        case 'radial_gradient':
+            var position = radialBackground.get('position');
+            var size = radialBackground.get('size');
+            return "-webkit-radial-gradient(" + position + ", circle " + size + ", " + color1 + " " + stop1 + "%, " + color2 + " " + stop2 + "%)";
+        case 'none':
+            return null;
+    }
+}
+function updateOverlayStyle(state) {
+    var opacity = state.get('opacity');
+    var overlayBackground = state.get('blend');
+    var background = getOverlayColor(overlayBackground);
+    var overlay = {
+        content: ' ',
+        display: 'block',
+        height: '100%',
+        width: '100%',
+        top: '0',
+        left: '0',
+        pointerEvents: 'none',
+        position: 'absolute',
+        mixBlendMode: 'normal',
+        opacity: (opacity / 100),
+        background: background
+    };
+    return {
+        overlay: overlay
+    };
+}
+
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12645,33 +12775,32 @@ FiltersEffects = __decorate([
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__ = __webpack_require__("./src/angular2-instagram-core.module.ts");
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Angular2InstagramCoreModule", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "FiltersEffects", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DEFAULTS", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "filtersReducer", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFiltersState", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFilterStyleValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getOverlayStyleValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["h"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getContrastFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["i"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBrightnessFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["j"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSaturateFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["k"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSepiaFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["l"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getGrayScaleFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["m"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getInvertFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["n"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getHueRotateFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["o"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBlurFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["p"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBlendFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["q"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSelectedImage", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["r"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getImages", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["s"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["t"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getLoading", function() { return __WEBPACK_IMPORTED_MODULE_0__angular2_instagram_core_module__["u"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__("./src/actions/index.ts");
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "FiltersActions", function() { return __WEBPACK_IMPORTED_MODULE_1__actions__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__effects__ = __webpack_require__("./src/effects/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "FiltersEffects", function() { return __WEBPACK_IMPORTED_MODULE_2__effects__["a"]; });
+/* empty harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reducers__ = __webpack_require__("./src/reducers/index.ts");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "filtersReducer", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFilterStyles", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "updateFilterStyle", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getOverlayColor", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "updateOverlayStyle", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFiltersState", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFilterStyleValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getOverlayStyleValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getContrastFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBrightnessFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSaturateFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["l"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSepiaFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["m"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getGrayScaleFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["n"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getInvertFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["o"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getHueRotateFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["p"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBlurFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["q"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getBlendFilterValue", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["r"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getSelectedImage", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["s"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getImages", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["t"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["u"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getLoading", function() { return __WEBPACK_IMPORTED_MODULE_3__reducers__["v"]; });
+/* empty harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services__ = __webpack_require__("./src/services/index.ts");
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "FiltersService", function() { return __WEBPACK_IMPORTED_MODULE_4__services__["a"]; });
 
@@ -12691,12 +12820,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions_filters_actions__ = __webpack_require__("./src/actions/filters-actions.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__("./src/constants.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return initialState; });
-/* harmony export (immutable) */ __webpack_exports__["b"] = filtersReducer;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getFilterStyles;
-/* harmony export (immutable) */ __webpack_exports__["d"] = updateFilterStyle;
-/* harmony export (immutable) */ __webpack_exports__["e"] = getOverlayColor;
-/* harmony export (immutable) */ __webpack_exports__["f"] = updateOverlayStyle;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers__ = __webpack_require__("./src/helpers.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DEFAULTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return initialState; });
+/* harmony export (immutable) */ __webpack_exports__["c"] = filtersReducer;
+
 
 
 
@@ -12738,7 +12866,9 @@ var initialState = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__
         left: '0',
         pointerEvents: 'none',
         position: 'absolute',
-        mixBlendMode: 'normal'
+        mixBlendMode: 'normal',
+        opacity: 0.5,
+        background: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["a" /* getOverlayColor */])('none')
     }),
     selectedImage: defaultImage,
     images: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["List"])(),
@@ -12763,8 +12893,8 @@ function filtersReducer(state, _a) {
                 var value = payload.value, type = payload.type;
                 filtersState
                     .merge((_a = {}, _a["" + type] = value, _a))
-                    .merge(updateFilterStyle(filtersState))
-                    .merge(updateOverlayStyle(filtersState));
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["b" /* updateFilterStyle */])(filtersState))
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["c" /* updateOverlayStyle */])(filtersState));
                 var _a;
             });
         case __WEBPACK_IMPORTED_MODULE_1__actions_filters_actions__["a" /* FiltersActions */].LOADING:
@@ -12819,105 +12949,16 @@ function filtersReducer(state, _a) {
                     .merge({ 'blur': 0 })
                     .merge({ 'blend': 'none' })
                     .merge({ 'opacity': 50 })
-                    .merge(updateFilterStyle(DEFAULTS))
-                    .merge(updateOverlayStyle(DEFAULTS));
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["b" /* updateFilterStyle */])(DEFAULTS))
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["c" /* updateOverlayStyle */])(DEFAULTS));
             });
         default:
             return state.withMutations(function (filtersState) {
                 filtersState
-                    .merge(updateFilterStyle(filtersState))
-                    .merge(updateOverlayStyle(filtersState));
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["b" /* updateFilterStyle */])(filtersState))
+                    .merge(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["c" /* updateOverlayStyle */])(filtersState));
             });
     }
-}
-//TODO @damnko: refactor to a utils file
-function getFilterStyles(state) {
-    var filters = '';
-    filters += "contrast(" + state.get('contrast') + "%) ";
-    filters += "brightness(" + state.get('brightness') + "%) ";
-    filters += "saturate(" + state.get('saturate') + "%) ";
-    filters += "sepia(" + state.get('sepia') + "%) ";
-    filters += "grayscale(" + state.get('grayScale') + "%) ";
-    filters += "invert(" + state.get('invert') + "%) ";
-    filters += "hue-rotate(" + state.get('hueRotate') + "deg) ";
-    filters += "blur(" + state.get('blur') + "px) ";
-    return filters;
-}
-//TODO @damnko: refactor to a utils file
-function updateFilterStyle(state) {
-    var styles = {
-        WebkitFilter: getFilterStyles(state),
-        filter: getFilterStyles(state),
-        position: 'relative'
-    };
-    return {
-        styles: styles
-    };
-}
-//TODO @damnko: refactor to a utils file
-function getOverlayColor(overlayType) {
-    var solidBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
-        a: 0.5,
-        b: 253,
-        g: 162,
-        r: 62
-    });
-    var linearBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
-        a: 0.5,
-        b: 253,
-        g: 162,
-        r: 62,
-        stop: 10,
-        direction: 'to bottom'
-    });
-    var radialBackground = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_immutable__["Map"])({
-        a: 0.04,
-        b: 70,
-        g: 70,
-        r: 70,
-        stop: 100,
-        position: 'center center',
-        size: 'closest-corner'
-    });
-    var stop1 = linearBackground.get('stop');
-    var stop2 = radialBackground.get('stop');
-    var color1 = "rgba(" + linearBackground.get('r') + ", " + linearBackground.get('g') + ", " + linearBackground.get('b') + ", " + linearBackground.get('a') + ")";
-    var color2 = "rgba(" + radialBackground.get('r') + ", " + radialBackground.get('g') + ", " + radialBackground.get('b') + ", " + radialBackground.get('a') + ")";
-    switch (overlayType) {
-        case 'solid_background':
-            return "rgba(" + solidBackground.get('r') + ", " + solidBackground.get('g') + ", " + solidBackground.get('b') + ", " + solidBackground.get('a') + ")";
-        case 'linear_gradient':
-            var direction = linearBackground.get('direction');
-            return "linear-gradient(" + direction + ", " + color1 + " " + stop1 + "%, " + color2 + " " + stop2 + "%)";
-        case 'radial_gradient':
-            var position = radialBackground.get('position');
-            var size = radialBackground.get('size');
-            return "-webkit-radial-gradient(" + position + ", circle " + size + ", " + color1 + " " + stop1 + "%, " + color2 + " " + stop2 + "%)";
-        case 'none':
-            return null;
-    }
-}
-//TODO @damnko: refactor to a utils file
-function updateOverlayStyle(state) {
-    var opacity = state.get('opacity');
-    var overlayBackground = state.get('blend');
-    var background = getOverlayColor(overlayBackground);
-    var overlay = {
-        content: ' ',
-        display: 'block',
-        height: '100%',
-        width: '100%',
-        top: '0',
-        left: '0',
-        pointerEvents: 'none',
-        position: 'absolute',
-        mixBlendMode: 'normal',
-        opacity: (opacity / 100),
-        background: background
-    };
-    return {
-        overlay: overlay
-    };
 }
 
 
@@ -12931,26 +12972,23 @@ function updateOverlayStyle(state) {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["b"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_0__filters_reducer__["f"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__selectors__ = __webpack_require__("./src/reducers/selectors.ts");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["p"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["j"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["k"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["g"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["h"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["i"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["l"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["m"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["n"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["o"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["p"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["j"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["k"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["b"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["c"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["d"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["h"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["i"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["l"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["m"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["n"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_1__selectors__["o"]; });
 
 
 
@@ -13192,22 +13230,34 @@ var FiltersService = FiltersService_1 = (function () {
         }
     };
     FiltersService.prototype.changeSaturate = function (value) {
-        this.store$.dispatch(this.actions.changeSaturate(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeSaturate(value));
+        }
     };
     FiltersService.prototype.changeSepia = function (value) {
-        this.store$.dispatch(this.actions.changeSepia(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeSepia(value));
+        }
     };
     FiltersService.prototype.changeGrayScale = function (value) {
-        this.store$.dispatch(this.actions.changeGrayScale(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeGrayScale(value));
+        }
     };
     FiltersService.prototype.changeInvert = function (value) {
-        this.store$.dispatch(this.actions.changeInvert(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeInvert(value));
+        }
     };
     FiltersService.prototype.changeHueRotate = function (value) {
-        this.store$.dispatch(this.actions.changeHueRotate(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeHueRotate(value));
+        }
     };
     FiltersService.prototype.changeBlur = function (value) {
-        this.store$.dispatch(this.actions.changeBlur(value));
+        if (typeof value === 'number') {
+            this.store$.dispatch(this.actions.changeBlur(value));
+        }
     };
     FiltersService.prototype.changeBlend = function (value) {
         this.store$.dispatch(this.actions.changeBlend(value));
