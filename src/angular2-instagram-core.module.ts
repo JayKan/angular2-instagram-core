@@ -1,6 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 import { FiltersActions } from './actions';
 import { FiltersService } from './services';
+import { FiltersEffects } from './effects';
 
 export * from './actions';
 export * from './effects';
