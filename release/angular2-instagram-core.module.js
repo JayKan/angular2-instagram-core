@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FiltersActions } from './actions';
 import { FiltersService } from './services';
+export * from './actions';
 export * from './effects';
 export * from './reducers';
+export * from './services';
 var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }

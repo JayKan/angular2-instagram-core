@@ -2,9 +2,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FiltersActions } from './actions';
 import { FiltersService } from './services';
 
+export * from './actions';
 export * from './effects';
-export * from './reducers';
 export * from './interfaces';
+export * from './reducers';
+export * from './services';
 
 @NgModule({})
 export class Angular2InstagramCoreModule {
