@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject, getTestBed } from '@angular/core/testing';
+import { MockBackend } from '@angular/http/testing';
 import { Store, StoreModule, Action } from '@ngrx/store';
-import { HttpModule } from '@angular/http';
+import { HttpModule, XHRBackend, Response, ResponseOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Map } from 'immutable';
-import { filtersReducer, initialState } from '../reducers';
+import { Map as ImmutableMap } from 'immutable';
+import 'rxjs/add/operator/finally';
+
+import { filtersReducer, initialState, DEFAULTS } from '../reducers';
 import { FiltersActions } from '../actions';
 import { FiltersService } from './filters-service';
 import { AppState } from '../interfaces';
+import { presets } from '../constants';
+import { updateFilterStyle, updateOverlayStyle } from '../helpers';
 
 describe('filters-service', () => {
   let actions: FiltersActions;
@@ -22,6 +27,7 @@ describe('filters-service', () => {
       providers: [
         FiltersActions,
         FiltersService,
+        { provide: XHRBackend, useClass: MockBackend }
       ]
     });
 
@@ -128,12 +134,9 @@ describe('filters-service', () => {
         expect(count).toBe(1);
         expect(value).toEqual(initialValue);
 
-        // HELP: is this correct or should I create a mock action that
-        // changes only the overlayStyle prop?
-        // (I think this is good)
         let newValue = {
           figureStyle: initialState.get('styles'),
-          overlayStyle: Map(Object.assign({}, initialState.get('overlay').toJS(), { background: 'solid_background' })),
+          overlayStyle: ImmutableMap(Object.assign({}, initialState.get('overlay').toJS(), { background: 'solid_background' })),
           key: 'aden'
         };
 
@@ -143,20 +146,54 @@ describe('filters-service', () => {
         expect(value).toEqual(newValue.overlayStyle.toJS());
 
         // not changing overlayStyle.background shouldn't emit any new value
-        newValue.overlayStyle.set('display', 'inline');
+        const overlayStyle = newValue.overlayStyle.set('display', 'inline');
+        newValue.overlayStyle = overlayStyle;
         store.dispatch(actions.changePreset(newValue));
         expect(count).toBe(2);
-
-        // HELP: when the default action is triggered the overlayStyle gets updated
-        // should we test this behavior?
-        // store.dispatch({ type: 'UNDEFINED' });
-        // expect(count).toBe(2);
-        // (NO, I think this is good we don't need to test the default)
       });
     });
 
     describe('filterStyle$ observable', () => {
-      // TODO(damnko): complete this once overlayStyle test will be confirmed as appropriate
+      it('should stream the current filterStyle from store', () => {
+        const state = initialState
+          .merge({ 'contrast'   : 100   })
+          .merge({ 'brightness' : 100   })
+          .merge({ 'saturate'   : 100   })
+          .merge({ 'sepia'      : 0     })
+          .merge({ 'grayScale'  : 0     })
+          .merge({ 'invert'     : 0     })
+          .merge({ 'hueRotate'  : 0     })
+          .merge({ 'blur'       : 0     })
+          .merge({ 'blend'      : 'none'})
+          .merge({ 'opacity'    : 50    })
+          .merge(updateFilterStyle(DEFAULTS))
+          .merge(updateOverlayStyle(DEFAULTS));
+
+        service.filterStyle$.subscribe(res => {
+          count++;
+          value = res;
+        });
+
+        expect(count).toBe(1);
+        expect(value).toEqual(state.get('styles').toJS());
+
+        const newValue = {
+          figureStyle: ImmutableMap(Object.assign({}, state.get('styles').toJS(), { filter: 'blur(20px)' })),
+          overlayStyle: initialState.get('overlay'),
+          key: 'aden'
+        };
+
+        // test after changing the figureStyle part of the payload
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+        expect(value).toEqual(newValue.figureStyle.toJS());
+
+        // not changing figureStyle.webkitFilter or figureStyle.filter shouldn't emit any new value
+        const figureStyle = newValue.figureStyle.set('position', 'absolute');
+        newValue.figureStyle = figureStyle;
+        store.dispatch(actions.changePreset(newValue));
+        expect(count).toBe(2);
+      });
     });
 
     describe('selectedImage$ observable', () => {
@@ -211,11 +248,10 @@ describe('filters-service', () => {
         expect(count).toBe(2);
         expect(value).toEqual(images);
 
-        // HELP: triggering the default event returns the same array of images
+        // TODO: triggering the default event returns the same array of images
         // and triggers service.images$ even if selectors.getImages uses distinctUntilChanged()
         // store.dispatch({ type: 'UNDEFINED' });
         // expect(count).toBe(2);
-        // (Hmm interesting, we can come back to this one later)
       });
     });
 
@@ -275,9 +311,6 @@ describe('filters-service', () => {
         count++;
         value = res;
       });
-
-      // HELP: shouldn't we wrap each of these in a dedicated "it" function?
-      // (Yes we can wrap `it` function with appropriate comments)
 
       // auto-emitting initial value
       expect(count).toBe(1);
@@ -368,27 +401,127 @@ describe('filters-service', () => {
     sharedObservableTest(blur, 'changeBlur()');
 
     describe('changeBlend()', () => {
+      it('should call store.dispatch() with changeBlend() action', () => {
+        service.changeBlend('blend');
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeBlend('blend'));
 
+        service.changeBlend('none');
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeBlend('none'));
+      });
     });
 
     describe('changePreset()', () => {
+      it('should call store.dispatch() with changePreset() action', () => {
+        let value = changePreset({ position: 'absolute' }, { display: 'inline' });
+        service.changePreset(value);
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changePreset(value));
 
+        value = changePreset({ position: 'relative' }, { display: 'block' });
+        service.changePreset(value);
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changePreset(value));
+      });
+    });
+
+    describe('changeSelectImage()', () => {
+      it('should call store.dispatch() with changeSelectImage() action', () => {
+        let value = 'https://url/image-1/';
+        service.changeSelectImage(value);
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeSelectImage(value));
+
+        value = 'https://url/image-2/';
+        service.changeSelectImage(value);
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeSelectImage(value));
+      });
     });
 
     describe('loadAllImages()', () => {
-
+      it('should call store.dispatch() with loadImages() action', () => {
+        service.loadAllImages();
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.loadImages());
+      });
     });
 
     describe('resetToDefaults()', () => {
-
+      it('should call store.dispatch() with resetToDefaults() action', () => {
+        service.resetToDefaults()
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.resetToDefaults());
+      });
     });
 
     describe('changeLoading()', () => {
+      it('should call store.dispatch() with changeLoading() action', () => {
+        service.changeLoading(true);
+        expect(store.dispatch).toHaveBeenCalledTimes(1);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeLoading(true));
 
+        service.changeLoading(false);
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+        expect(store.dispatch).toHaveBeenCalledWith(actions.changeLoading(false));
+      });
     });
 
     describe('fetchImages()', () => {
+      it('should return an Observable<any> with a list of images', () => {
+          const mockBackend: MockBackend = getTestBed().get(XHRBackend);
+          const res = [{
+            id: 1,
+            urls: {
+              full: 'https://url.com/big-image-1/',
+              thumb: 'https://url.com/thumb-image-1/',
+            }
+          }, {
+            id: 2,
+            urls: {
+              full: 'https://url.com/big-image-2/',
+              thumb: 'https://url.com/thumb-image-2/',
+            }
+          }];
 
+          mockBackend.connections.subscribe((connection) => {
+            // fake the http response of the api
+            if (connection.request.url === 'https://validurl.com'){
+              connection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(res)
+              })));
+            } else {
+              connection.mockError(new Error('Connection error'));
+            }
+          });
+
+          // test cache to be empty
+          expect(service.cache.size).toBe(0);
+
+          // HELP: do you know of any better way to test if the observable
+          // terminated with an error instead of using .finally()?
+
+          let connectionError = false;
+          // test with a valid url
+          service.fetchImages('https://validurl.com').finally(() => {
+            expect(connectionError).toBeFalsy();
+          }).subscribe(res => {
+            expect(res.length).toBe(2);
+            expect(res[1].thumb).toBe('https://url.com/thumb-image-2/');
+            // check cache to have the new value
+            expect(service.cache.get('https://validurl.com')).toEqual(res);
+          }, err => {
+            connectionError = true;
+          }).unsubscribe();
+
+          // test with an invalid url to simulate an error
+          service.fetchImages('https://invalidurl.com').finally(() => {
+            expect(connectionError).toBeTruthy();
+          }).subscribe(() => {}, err => {
+            connectionError = true;
+          }).unsubscribe();
+      });
     });
 
     function sharedObservableTest(actionInstance: ActionInstance, testName: string) {
@@ -433,4 +566,20 @@ type ActionInstance = () => {
   service: (value: number) => void,
   action: (value: number|string) => Action,
   actionName: string
+}
+type ObservableInstance = () => {
+  service: Observable<any>;
+  action: (value: number) => Action
+}
+interface Preset {
+  figureStyle: ImmutableMap<any, any>;
+  overlayStyle: ImmutableMap<any, any>;
+  key: string;
+}
+function changePreset(figureStyleObj: any, overlayStyleObj: any, key: string = 'aden'): Preset {
+  return {
+    figureStyle: ImmutableMap(Object.assign({}, initialState.get('styles').toJS(), figureStyleObj)),
+    overlayStyle: ImmutableMap(Object.assign({}, initialState.get('overlay').toJS(), figureStyleObj)),
+    key: key
+  }
 }

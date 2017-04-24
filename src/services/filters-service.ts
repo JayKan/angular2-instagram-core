@@ -60,7 +60,7 @@ export class FiltersService {
   error$: Observable<string>;
   loading$: Observable<boolean>;
 
-  private cache: Map<any, any> = new Map();
+  cache: Map<any, any> = new Map();
 
   constructor(
     private store$: Store<AppState>,
