@@ -1438,29 +1438,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = (function () {
+var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }
-    /**
-     * @description Use this method in your other (non root) modules to import the services
-     * @returns {ModuleWithProviders}
-     */
-    Angular2InstagramCoreModule.forChild = function () {
-        return {
-            ngModule: Angular2InstagramCoreModule_1,
-            providers: [
-                __WEBPACK_IMPORTED_MODULE_1__actions__["a" /* FiltersActions */],
-                __WEBPACK_IMPORTED_MODULE_2__services__["a" /* FiltersService */]
-            ]
-        };
-    };
     return Angular2InstagramCoreModule;
 }());
-Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({})
+Angular2InstagramCoreModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_1__actions__["a" /* FiltersActions */],
+            __WEBPACK_IMPORTED_MODULE_2__services__["a" /* FiltersService */]
+        ]
+    })
 ], Angular2InstagramCoreModule);
 
-var Angular2InstagramCoreModule_1;
 
 
 /***/ }),

@@ -8,24 +8,29 @@ export * from './services';
 var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }
-    /**
-     * @description Use this method in your other (non root) modules to import the services
-     * @returns {ModuleWithProviders}
-     */
-    Angular2InstagramCoreModule.forChild = function () {
-        return {
-            ngModule: Angular2InstagramCoreModule,
-            providers: [
-                FiltersActions,
-                FiltersService
-            ]
-        };
-    };
     return Angular2InstagramCoreModule;
 }());
 export { Angular2InstagramCoreModule };
+/**
+ * @description Use this method in your other (non root) modules to import the services
+ * @returns {ModuleWithProviders}
+ */
+// static forChild(): ModuleWithProviders {
+//   return {
+//     ngModule: Angular2InstagramCoreModule,
+//     providers: [
+//       FiltersActions,
+//       FiltersService
+//     ]
+//   };
+// }
 Angular2InstagramCoreModule.decorators = [
-    { type: NgModule, args: [{},] },
+    { type: NgModule, args: [{
+                providers: [
+                    FiltersActions,
+                    FiltersService
+                ]
+            },] },
 ];
 /** @nocollapse */
 Angular2InstagramCoreModule.ctorParameters = function () { return []; };
