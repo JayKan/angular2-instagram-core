@@ -135,7 +135,7 @@ describe('filters-reducer', () => {
     it('should return FilterState with default values', () => {
       const action = {
         type: FiltersActions.RESET_DEFAULTS
-      }
+      };
 
       const state = filtersReducer(initialState, action);
       const update = initialState.withMutations((filtersState: FiltersState) => {

@@ -1,13 +1,12 @@
 import { StoreModule } from '@ngrx/store';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
-import { Actions } from '@ngrx/effects';
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { XHRBackend, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
 import { filtersReducer } from '../reducers/filters-reducer';
-import { FiltersActions } from './../actions/filters-actions';
-import { FiltersService } from './../services/filters-service';
+import { FiltersActions } from '../actions/filters-actions';
+import { FiltersService } from '../services/filters-service';
 import { FiltersEffects } from './filters-effects';
 
 describe('filter-effects', () => {
@@ -69,6 +68,7 @@ describe('filter-effects', () => {
         };
       });
     });
+
     it('should return FETCH_IMAGES_FULFILLED action', () => {
       const action = {
         type: FiltersActions.LOAD_IMAGES,
@@ -82,6 +82,7 @@ describe('filter-effects', () => {
           expect(res).toEqual(filtersActions.fetchImagesFulfilled(refactoredRecords));
       });
     });
+
     it('should fail and return FETCH_IMAGES_FAILED action', () => {
       const action = {
         type: FiltersActions.LOAD_IMAGES,

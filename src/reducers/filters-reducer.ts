@@ -2,10 +2,9 @@ import { Action } from '@ngrx/store';
 import { Map, List } from 'immutable';
 
 import { FiltersActions } from '../actions/filters-actions';
-import { FiltersState, FilterStyle, OverlayStyle } from '../interfaces';
+import { FiltersState } from '../interfaces';
 import { presets } from '../constants';
 import {
-  getFilterStyles,
   updateFilterStyle,
   updateOverlayStyle,
   getOverlayColor
