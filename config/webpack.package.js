@@ -47,10 +47,12 @@ module.exports = (env) => {
       'rxjs/Observable': 'rxjs/Observable',
       'rxjs/add/operator/switchMap': 'rxjs/add/operator/switchMap',
       'rxjs/add/operator/map': 'rxjs/add/operator/map',
+      'rxjs/add/operator/do': 'rxjs/add/operator/do',
       'rxjs/add/operator/catch': 'rxjs/add/operator/catch',
       'rxjs/add/observable/of': 'rxjs/add/observable/of',
       'rxjs/add/operator/distinctUntilChanged': 'rxjs/add/operator/distinctUntilChanged',
       'rxjs/add/operator/let': 'rxjs/add/operator/let',
+      'rxjs/add/observable/throw': 'rxjs/add/observable/throw',
       'zone.js/dist/zone': 'zone.js/dist/zone'
     },
     plugins: [
