@@ -1000,85 +1000,86 @@ function filtersReducer(state, _a) {
 
 
 
-function getFiltersState(state$) {
-    return state$.select(function (state) { return state.filters; });
+function getFiltersState(store$) {
+    return store$.select(function (state) { return state.filters; })
+        .distinctUntilChanged();
 }
-function getFilterStyleValue(state$) {
-    return state$.let(getFiltersState)
+function getFilterStyleValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('styles').toJS(); })
         .distinctUntilChanged(function (previous, next) {
         return previous.WebkitFilter === next.WebkitFilter && previous.filter === next.filter;
     });
 }
-function getOverlayStyleValue(state$) {
-    return state$.let(getFiltersState)
+function getOverlayStyleValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('overlay').toJS(); })
         .distinctUntilChanged(function (previous, next) {
         return previous.background === next.background;
     });
 }
-function getContrastFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getContrastFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('contrast'); })
         .distinctUntilChanged();
 }
-function getBrightnessFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getBrightnessFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('brightness'); })
         .distinctUntilChanged();
 }
-function getSaturateFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getSaturateFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('saturate'); })
         .distinctUntilChanged();
 }
-function getSepiaFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getSepiaFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('sepia'); })
         .distinctUntilChanged();
 }
-function getGrayScaleFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getGrayScaleFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('grayScale'); })
         .distinctUntilChanged();
 }
-function getInvertFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getInvertFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filersState) { return filersState.get('invert'); })
         .distinctUntilChanged();
 }
-function getHueRotateFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getHueRotateFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('hueRotate'); })
         .distinctUntilChanged();
 }
-function getBlurFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getBlurFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('blur'); })
         .distinctUntilChanged();
 }
-function getBlendFilterValue(state$) {
-    return state$.let(getFiltersState)
+function getBlendFilterValue(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('blend'); })
         .distinctUntilChanged();
 }
-function getSelectedImage(state$) {
-    return state$.let(getFiltersState)
+function getSelectedImage(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('selectedImage'); })
         .distinctUntilChanged();
 }
-function getImages(state$) {
-    return state$.let(getFiltersState)
+function getImages(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('images').toJS(); })
         .distinctUntilChanged();
 }
-function getError(state$) {
-    return state$.let(getFiltersState)
+function getError(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('error'); })
         .distinctUntilChanged();
 }
-function getLoading(state$) {
-    return state$.let(getFiltersState)
+function getLoading(store$) {
+    return store$.let(getFiltersState)
         .map(function (filtersState) { return filtersState.get('loading'); })
         .distinctUntilChanged();
 }
