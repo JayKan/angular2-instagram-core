@@ -3,6 +3,9 @@
 [![PRs Welcome][prs-badge]][prs]
 [![MIT License][license-badge]][license]
 
+## Installation
+`npm install --save-dev angular2-instagram-core`
+
 ## License
 MIT © [Jay Kan](https://github.com/JayKan)
 
