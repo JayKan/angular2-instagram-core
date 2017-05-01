@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 import { FiltersActions } from './actions';
 import { FiltersService } from './services';
+import { FiltersEffects } from './effects/filters-effects';
 var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }
@@ -21,7 +23,9 @@ var Angular2InstagramCoreModule = (function () {
 }());
 export { Angular2InstagramCoreModule };
 Angular2InstagramCoreModule.decorators = [
-    { type: NgModule, args: [{},] },
+    { type: NgModule, args: [{
+                imports: [EffectsModule.run(FiltersEffects)]
+            },] },
 ];
 /** @nocollapse */
 Angular2InstagramCoreModule.ctorParameters = function () { return []; };
