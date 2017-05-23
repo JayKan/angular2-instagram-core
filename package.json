@@ -1,6 +1,6 @@
 {
   "name": "angular2-instagram-core",
-  "version": "0.0.4-2",
+  "version": "0.0.5",
   "description": "Angular2 Instagram Core serivces",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
