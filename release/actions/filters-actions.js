@@ -151,29 +151,29 @@ var FiltersActions = (function () {
             type: FiltersActions.RESET_DEFAULTS
         };
     };
+    FiltersActions.CHANGE_CONTRAST = 'CHANGE_CONTRAST';
+    FiltersActions.CHANGE_BRIGHTNESS = 'CHANGE_BRIGHTNESS';
+    FiltersActions.CHANGE_SATURATE = 'CHANGE_SATURATE';
+    FiltersActions.CHANGE_SEPIA = 'CHANGE_SEPIA';
+    FiltersActions.CHANGE_GRAYSCALE = 'CHANGE_GRAYSCALE';
+    FiltersActions.CHANGE_INVERT = 'CHANGE_INVERT';
+    FiltersActions.CHANGE_HUEROTATE = 'CHANGE_HUEROTATE';
+    FiltersActions.CHANGE_BLUR = 'CHANGE_BLUR';
+    FiltersActions.CHANGE_BLEND = 'CHANGE_BLEND';
+    FiltersActions.CHANGE_PRESET = 'CHANGE_PRESET';
+    FiltersActions.LOAD_IMAGES = 'LOAD_IMAGES';
+    FiltersActions.FETCH_IMAGES_FAILED = 'FETCH_IMAGES_FAILED';
+    FiltersActions.FETCH_IMAGES_FULFILLED = 'FETCH_IMAGES_FULFILLED';
+    FiltersActions.CHANGE_SELECTED_IMAGE = 'CHANGE_SELECTED_IMAGE';
+    FiltersActions.RESET_DEFAULTS = 'RESET_DEFAULTS';
+    FiltersActions.LOADING = 'LOADING';
+    FiltersActions.API = 'https://api.unsplash.com/photos/?per_page=50&client_id=86f6167ee81be7b8aea6aa0d999c1bae79b3351b43e8df03c8baaa9c630f24ba';
+    FiltersActions.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    FiltersActions.ctorParameters = function () { return []; };
     return FiltersActions;
 }());
 export { FiltersActions };
-FiltersActions.CHANGE_CONTRAST = 'CHANGE_CONTRAST';
-FiltersActions.CHANGE_BRIGHTNESS = 'CHANGE_BRIGHTNESS';
-FiltersActions.CHANGE_SATURATE = 'CHANGE_SATURATE';
-FiltersActions.CHANGE_SEPIA = 'CHANGE_SEPIA';
-FiltersActions.CHANGE_GRAYSCALE = 'CHANGE_GRAYSCALE';
-FiltersActions.CHANGE_INVERT = 'CHANGE_INVERT';
-FiltersActions.CHANGE_HUEROTATE = 'CHANGE_HUEROTATE';
-FiltersActions.CHANGE_BLUR = 'CHANGE_BLUR';
-FiltersActions.CHANGE_BLEND = 'CHANGE_BLEND';
-FiltersActions.CHANGE_PRESET = 'CHANGE_PRESET';
-FiltersActions.LOAD_IMAGES = 'LOAD_IMAGES';
-FiltersActions.FETCH_IMAGES_FAILED = 'FETCH_IMAGES_FAILED';
-FiltersActions.FETCH_IMAGES_FULFILLED = 'FETCH_IMAGES_FULFILLED';
-FiltersActions.CHANGE_SELECTED_IMAGE = 'CHANGE_SELECTED_IMAGE';
-FiltersActions.RESET_DEFAULTS = 'RESET_DEFAULTS';
-FiltersActions.LOADING = 'LOADING';
-FiltersActions.API = 'https://api.unsplash.com/photos/?per_page=50&client_id=86f6167ee81be7b8aea6aa0d999c1bae79b3351b43e8df03c8baaa9c630f24ba';
-FiltersActions.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-FiltersActions.ctorParameters = function () { return []; };
 //# sourceMappingURL=filters-actions.js.map

@@ -92,9 +92,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var FiltersActions = FiltersActions_1 = (function () {
+var FiltersActions = (function () {
     function FiltersActions() {
     }
+    FiltersActions_1 = FiltersActions;
     FiltersActions.prototype.changeContrast = function (value, type) {
         if (type === void 0) { type = 'contrast'; }
         return {
@@ -244,30 +245,30 @@ var FiltersActions = FiltersActions_1 = (function () {
             type: FiltersActions_1.RESET_DEFAULTS
         };
     };
+    FiltersActions.CHANGE_CONTRAST = 'CHANGE_CONTRAST';
+    FiltersActions.CHANGE_BRIGHTNESS = 'CHANGE_BRIGHTNESS';
+    FiltersActions.CHANGE_SATURATE = 'CHANGE_SATURATE';
+    FiltersActions.CHANGE_SEPIA = 'CHANGE_SEPIA';
+    FiltersActions.CHANGE_GRAYSCALE = 'CHANGE_GRAYSCALE';
+    FiltersActions.CHANGE_INVERT = 'CHANGE_INVERT';
+    FiltersActions.CHANGE_HUEROTATE = 'CHANGE_HUEROTATE';
+    FiltersActions.CHANGE_BLUR = 'CHANGE_BLUR';
+    FiltersActions.CHANGE_BLEND = 'CHANGE_BLEND';
+    FiltersActions.CHANGE_PRESET = 'CHANGE_PRESET';
+    FiltersActions.LOAD_IMAGES = 'LOAD_IMAGES';
+    FiltersActions.FETCH_IMAGES_FAILED = 'FETCH_IMAGES_FAILED';
+    FiltersActions.FETCH_IMAGES_FULFILLED = 'FETCH_IMAGES_FULFILLED';
+    FiltersActions.CHANGE_SELECTED_IMAGE = 'CHANGE_SELECTED_IMAGE';
+    FiltersActions.RESET_DEFAULTS = 'RESET_DEFAULTS';
+    FiltersActions.LOADING = 'LOADING';
+    FiltersActions.API = 'https://api.unsplash.com/photos/?per_page=50&client_id=86f6167ee81be7b8aea6aa0d999c1bae79b3351b43e8df03c8baaa9c630f24ba';
+    FiltersActions = FiltersActions_1 = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+    ], FiltersActions);
     return FiltersActions;
+    var FiltersActions_1;
 }());
-FiltersActions.CHANGE_CONTRAST = 'CHANGE_CONTRAST';
-FiltersActions.CHANGE_BRIGHTNESS = 'CHANGE_BRIGHTNESS';
-FiltersActions.CHANGE_SATURATE = 'CHANGE_SATURATE';
-FiltersActions.CHANGE_SEPIA = 'CHANGE_SEPIA';
-FiltersActions.CHANGE_GRAYSCALE = 'CHANGE_GRAYSCALE';
-FiltersActions.CHANGE_INVERT = 'CHANGE_INVERT';
-FiltersActions.CHANGE_HUEROTATE = 'CHANGE_HUEROTATE';
-FiltersActions.CHANGE_BLUR = 'CHANGE_BLUR';
-FiltersActions.CHANGE_BLEND = 'CHANGE_BLEND';
-FiltersActions.CHANGE_PRESET = 'CHANGE_PRESET';
-FiltersActions.LOAD_IMAGES = 'LOAD_IMAGES';
-FiltersActions.FETCH_IMAGES_FAILED = 'FETCH_IMAGES_FAILED';
-FiltersActions.FETCH_IMAGES_FULFILLED = 'FETCH_IMAGES_FULFILLED';
-FiltersActions.CHANGE_SELECTED_IMAGE = 'CHANGE_SELECTED_IMAGE';
-FiltersActions.RESET_DEFAULTS = 'RESET_DEFAULTS';
-FiltersActions.LOADING = 'LOADING';
-FiltersActions.API = 'https://api.unsplash.com/photos/?per_page=50&client_id=86f6167ee81be7b8aea6aa0d999c1bae79b3351b43e8df03c8baaa9c630f24ba';
-FiltersActions = FiltersActions_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
-], FiltersActions);
 
-var FiltersActions_1;
 
 
 /***/ }),
@@ -306,9 +307,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = (function () {
+var Angular2InstagramCoreModule = (function () {
     function Angular2InstagramCoreModule() {
     }
+    Angular2InstagramCoreModule_1 = Angular2InstagramCoreModule;
     /**
      * @description Use this method in your other (non root) modules to import the services
      * @returns {ModuleWithProviders}
@@ -322,15 +324,15 @@ var Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = (function () {
             ]
         };
     };
+    Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__ngrx_effects__["EffectsModule"].run(__WEBPACK_IMPORTED_MODULE_4__effects_filters_effects__["a" /* FiltersEffects */])]
+        })
+    ], Angular2InstagramCoreModule);
     return Angular2InstagramCoreModule;
+    var Angular2InstagramCoreModule_1;
 }());
-Angular2InstagramCoreModule = Angular2InstagramCoreModule_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__ngrx_effects__["EffectsModule"].run(__WEBPACK_IMPORTED_MODULE_4__effects_filters_effects__["a" /* FiltersEffects */])]
-    })
-], Angular2InstagramCoreModule);
 
-var Angular2InstagramCoreModule_1;
 
 
 /***/ }),
@@ -612,18 +614,18 @@ var FiltersEffects = (function () {
                 .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"].of(_this.filtersActions.fetchImagesFailed(error)); });
         });
     }
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__ngrx_effects__["Effect"])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"])
+    ], FiltersEffects.prototype, "fetchImages$", void 0);
+    FiltersEffects = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ngrx_effects__["Actions"],
+            __WEBPACK_IMPORTED_MODULE_8__services_filters_service__["a" /* FiltersService */],
+            __WEBPACK_IMPORTED_MODULE_7__actions_filters_actions__["a" /* FiltersActions */]])
+    ], FiltersEffects);
     return FiltersEffects;
 }());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__ngrx_effects__["Effect"])(),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_6_rxjs_Observable__["Observable"])
-], FiltersEffects.prototype, "fetchImages$", void 0);
-FiltersEffects = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ngrx_effects__["Actions"],
-        __WEBPACK_IMPORTED_MODULE_8__services_filters_service__["a" /* FiltersService */],
-        __WEBPACK_IMPORTED_MODULE_7__actions_filters_actions__["a" /* FiltersActions */]])
-], FiltersEffects);
 
 
 
@@ -1139,7 +1141,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var FiltersService = FiltersService_1 = (function () {
+var FiltersService = (function () {
     function FiltersService(store$, actions, http) {
         this.store$ = store$;
         this.actions = actions;
@@ -1161,6 +1163,7 @@ var FiltersService = FiltersService_1 = (function () {
         this.error$ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__reducers_selectors__["n" /* getError */])(store$);
         this.loading$ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__reducers_selectors__["o" /* getLoading */])(store$);
     }
+    FiltersService_1 = FiltersService;
     FiltersService.prototype.change = function (_a) {
         var value = _a.value, type = _a.type;
         switch (type) {
@@ -1283,28 +1286,28 @@ var FiltersService = FiltersService_1 = (function () {
         })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__["Observable"].throw('Error fetching images from Unsplash API. Please try again later.'); });
     };
+    FiltersService.CONTRAST = 'contrast';
+    FiltersService.BRIGHTNESS = 'brightness';
+    FiltersService.SATURATE = 'saturate';
+    FiltersService.SEPIA = 'sepia';
+    FiltersService.GRAYSCALE = 'grayScale';
+    FiltersService.INVERT = 'invert';
+    FiltersService.HUE_ROTATE = 'hueRotate';
+    FiltersService.BLUR = 'blur';
+    FiltersService.BLEND = 'blend';
+    FiltersService.PRESET = 'preset';
+    FiltersService.IMAGE = 'image';
+    FiltersService.LOADING = 'loading';
+    FiltersService = FiltersService_1 = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__ngrx_store__["Store"],
+            __WEBPACK_IMPORTED_MODULE_9__actions_filters_actions__["a" /* FiltersActions */],
+            __WEBPACK_IMPORTED_MODULE_8__angular_http__["Http"]])
+    ], FiltersService);
     return FiltersService;
+    var FiltersService_1;
 }());
-FiltersService.CONTRAST = 'contrast';
-FiltersService.BRIGHTNESS = 'brightness';
-FiltersService.SATURATE = 'saturate';
-FiltersService.SEPIA = 'sepia';
-FiltersService.GRAYSCALE = 'grayScale';
-FiltersService.INVERT = 'invert';
-FiltersService.HUE_ROTATE = 'hueRotate';
-FiltersService.BLUR = 'blur';
-FiltersService.BLEND = 'blend';
-FiltersService.PRESET = 'preset';
-FiltersService.IMAGE = 'image';
-FiltersService.LOADING = 'loading';
-FiltersService = FiltersService_1 = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__ngrx_store__["Store"],
-        __WEBPACK_IMPORTED_MODULE_9__actions_filters_actions__["a" /* FiltersActions */],
-        __WEBPACK_IMPORTED_MODULE_8__angular_http__["Http"]])
-], FiltersService);
 
-var FiltersService_1;
 
 
 /***/ }),

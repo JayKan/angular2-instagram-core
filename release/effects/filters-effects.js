@@ -31,20 +31,20 @@ var FiltersEffects = (function () {
                 .catch(function (error) { return Observable.of(_this.filtersActions.fetchImagesFailed(error)); });
         });
     }
+    FiltersEffects.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    FiltersEffects.ctorParameters = function () { return [
+        { type: Actions, },
+        { type: FiltersService, },
+        { type: FiltersActions, },
+    ]; };
+    __decorate([
+        Effect(),
+        __metadata("design:type", Observable)
+    ], FiltersEffects.prototype, "fetchImages$", void 0);
     return FiltersEffects;
 }());
 export { FiltersEffects };
-FiltersEffects.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-FiltersEffects.ctorParameters = function () { return [
-    { type: Actions, },
-    { type: FiltersService, },
-    { type: FiltersActions, },
-]; };
-__decorate([
-    Effect(),
-    __metadata("design:type", Observable)
-], FiltersEffects.prototype, "fetchImages$", void 0);
 //# sourceMappingURL=filters-effects.js.map
