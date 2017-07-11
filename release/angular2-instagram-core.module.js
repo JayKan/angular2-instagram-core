@@ -19,14 +19,14 @@ var Angular2InstagramCoreModule = (function () {
             ]
         };
     };
+    Angular2InstagramCoreModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [EffectsModule.run(FiltersEffects)]
+                },] },
+    ];
+    /** @nocollapse */
+    Angular2InstagramCoreModule.ctorParameters = function () { return []; };
     return Angular2InstagramCoreModule;
 }());
 export { Angular2InstagramCoreModule };
-Angular2InstagramCoreModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [EffectsModule.run(FiltersEffects)]
-            },] },
-];
-/** @nocollapse */
-Angular2InstagramCoreModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=angular2-instagram-core.module.js.map

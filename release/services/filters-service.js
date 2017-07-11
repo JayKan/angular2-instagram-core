@@ -153,28 +153,28 @@ var FiltersService = (function () {
         })
             .catch(function (error) { return Observable.throw('Error fetching images from Unsplash API. Please try again later.'); });
     };
+    FiltersService.CONTRAST = 'contrast';
+    FiltersService.BRIGHTNESS = 'brightness';
+    FiltersService.SATURATE = 'saturate';
+    FiltersService.SEPIA = 'sepia';
+    FiltersService.GRAYSCALE = 'grayScale';
+    FiltersService.INVERT = 'invert';
+    FiltersService.HUE_ROTATE = 'hueRotate';
+    FiltersService.BLUR = 'blur';
+    FiltersService.BLEND = 'blend';
+    FiltersService.PRESET = 'preset';
+    FiltersService.IMAGE = 'image';
+    FiltersService.LOADING = 'loading';
+    FiltersService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    FiltersService.ctorParameters = function () { return [
+        { type: Store, },
+        { type: FiltersActions, },
+        { type: Http, },
+    ]; };
     return FiltersService;
 }());
 export { FiltersService };
-FiltersService.CONTRAST = 'contrast';
-FiltersService.BRIGHTNESS = 'brightness';
-FiltersService.SATURATE = 'saturate';
-FiltersService.SEPIA = 'sepia';
-FiltersService.GRAYSCALE = 'grayScale';
-FiltersService.INVERT = 'invert';
-FiltersService.HUE_ROTATE = 'hueRotate';
-FiltersService.BLUR = 'blur';
-FiltersService.BLEND = 'blend';
-FiltersService.PRESET = 'preset';
-FiltersService.IMAGE = 'image';
-FiltersService.LOADING = 'loading';
-FiltersService.decorators = [
-    { type: Injectable },
-];
-/** @nocollapse */
-FiltersService.ctorParameters = function () { return [
-    { type: Store, },
-    { type: FiltersActions, },
-    { type: Http, },
-]; };
 //# sourceMappingURL=filters-service.js.map
