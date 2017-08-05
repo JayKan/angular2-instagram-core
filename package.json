@@ -1,6 +1,6 @@
 {
   "name": "angular2-instagram-core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Angular2 Instagram Core serivces",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
@@ -53,13 +53,13 @@
     "immutable": "^3.8.1"
   },
   "devDependencies": {
-    "@angular/common": "4.2.6",
-    "@angular/compiler": "4.2.6",
-    "@angular/compiler-cli": "4.2.6",
-    "@angular/core": "4.2.6",
-    "@angular/http": "4.2.6",
-    "@angular/platform-browser": "4.2.6",
-    "@angular/platform-browser-dynamic": "4.2.6",
+    "@angular/common": "4.3.3",
+    "@angular/compiler": "4.3.3",
+    "@angular/compiler-cli": "4.3.3",
+    "@angular/core": "4.3.3",
+    "@angular/http": "4.3.3",
+    "@angular/platform-browser": "4.3.3",
+    "@angular/platform-browser-dynamic": "4.3.3",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.2",
     "@ngrx/store": "^2.2.1",
