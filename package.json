@@ -1,7 +1,7 @@
 {
   "name": "angular2-instagram-core",
   "version": "0.0.7",
-  "description": "Angular2 Instagram Core serivces",
+  "description": "Angular2 Instagram Core services",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
   "scripts": {
@@ -53,13 +53,13 @@
     "immutable": "^3.8.1"
   },
   "devDependencies": {
-    "@angular/common": "4.3.3",
-    "@angular/compiler": "4.3.3",
-    "@angular/compiler-cli": "4.3.3",
-    "@angular/core": "4.3.3",
-    "@angular/http": "4.3.3",
-    "@angular/platform-browser": "4.3.3",
-    "@angular/platform-browser-dynamic": "4.3.3",
+    "@angular/common": "4.4.6",
+    "@angular/compiler": "4.4.6",
+    "@angular/compiler-cli": "4.4.6",
+    "@angular/core": "4.4.6",
+    "@angular/http": "4.4.6",
+    "@angular/platform-browser": "4.4.6",
+    "@angular/platform-browser-dynamic": "4.4.6",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.2",
     "@ngrx/store": "^2.2.1",
@@ -78,7 +78,7 @@
     "file-loader": "^0.11.1",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.26.0",
-    "immutable": "^3.8.1",
+    "immutable": "^3.8.2",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.0",
